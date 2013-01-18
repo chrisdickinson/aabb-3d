@@ -1,0 +1,39 @@
+{
+  "name": "aabb-3d",
+  "version": "0.0.0",
+  "description": "3d axis aligned bounding boxes",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrisdickinson/aabb-3d"
+  },
+  "keywords": [
+    "aabb",
+    "axis",
+    "aligned",
+    "bounding",
+    "boxes",
+    "3d"
+  ],
+  "author": "Chris Dickinson <chris@neversaw.us>",
+  "license": "MIT",
+  "dependencies": {
+    "gl-matrix": "2.X.X"
+  },
+  "devDependencies": {
+    "tape": "~0.1.5"
+  },
+  "testling": {
+    "files": "test.js",
+    "browsers": {
+      "ie": [ 10 ],
+      "firefox": [ 13, 14, 15, 16, 17, "nightly" ],
+      "chrome": [ 20, 23, "canary" ],
+      "safari": [ 6 ],
+      "opera": [ 12, "next" ]
+    }
+  }
+}
