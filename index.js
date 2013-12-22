@@ -3,17 +3,20 @@ module.exports = AABB
 var vec3 = require('gl-matrix').vec3
 
 function AABB(pos, vec) {
+
   if(!(this instanceof AABB)) {
     return new AABB(pos, vec)
   }
 
-  this.base = pos
+  var pos2 = vec3.create()
+  vec3.add(pos2, pos, vec)
+ 
+  this.base = vec3.min(vec3.create(), pos, pos2)
   this.vec = vec
+  this.max = vec3.max(vec3.create(), pos, pos2)
 
   this.mag = vec3.length(this.vec)
 
-  this.max = vec3.create()
-  vec3.add(this.max, this.base, this.vec)
 }
 
 var cons = AABB
@@ -83,6 +86,17 @@ proto.intersects = function(aabb) {
   return true
 }
 
+proto.touches = function(aabb) {
+
+  var intersection = this.union(aabb);
+
+  return (intersection !== null) &&
+         ((intersection.width() == 0) ||
+         (intersection.height() == 0) || 
+         (intersection.depth() == 0))
+
+}
+
 proto.union = function(aabb) {
   if(!this.intersects(aabb)) return null
 
@@ -95,3 +109,7 @@ proto.union = function(aabb) {
 
   return new AABB([base_x, base_y, base_z], [max_x - base_x, max_y - base_y, max_z - base_z])
 }
+
+
+
+
