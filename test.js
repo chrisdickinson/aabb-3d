@@ -91,5 +91,31 @@ test('intersects works', function(t) {
   b1 = aabb([12, 12, 12], [4, 4, 4])
   t.equals(b0.intersects(b1), true, 'should intersect (b0 contains b1)')
 
+  b1 = aabb([-5, -5, -5], [20, 20, 20])
+  t.equals(b0.intersects(b1), true, 'should intersects (b0 contains b1)')
+
+  b1 = aabb([-5, -5, -5], [10, 10, 10])
+  t.equals(b0.intersects(b1), false, 'should not intersect (b0 does not contain b1)')
+
   t.end()
+})
+
+test('touches works', function(t) { 
+  var b0 = aabb([10,10,10], [10, 10, 10])
+    , b1 = aabb([0, 0, 0], [10, 10, 10])
+
+  t.equals(b0.touches(b1), true, 'should touch')
+
+  b1 = aabb([10, 0, 0], [10, 10, 10])
+  t.equals(b0.touches(b1), true, 'should touch')
+
+  b1 = aabb([0, 10, 0], [10, 10, 10])
+  t.equals(b0.touches(b1), true, 'should touch')
+
+  b1 = aabb([0, 0, 10], [10, 10, 10])
+  t.equals(b0.touches(b1), true, 'should touch')
+
+  b1 = aabb([-10, -10, -10], [10, 10, 10])
+  t.equals(b0.touches(b1), false, 'should not touch')
+
 })
