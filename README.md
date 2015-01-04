@@ -63,6 +63,10 @@ returns true if the two bounding boxes intersect (or touch at all.)
 returns a new `aabb` representing the shared area of the
 two aabb's. returns `null` if the boxes don't intersect.
 
+### aabb.expand(aabb) -> new aabb
+
+returns a new `aabb` that surrounds both aabbs.
+
 # License
 
 MIT
