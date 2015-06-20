@@ -64,6 +64,12 @@ proto.translate = function(by) {
   return this
 }
 
+proto.setPosition = function(pos) {
+  vec3.subtract(pos, pos, this.base)
+  this.translate(pos)
+  return this
+}
+
 proto.expand = function(aabb) {
   var max = vec3.create()
     , min = vec3.create()

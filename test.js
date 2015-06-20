@@ -46,6 +46,36 @@ test('translate works', function(t) {
   t.end()
 })
 
+test('setPosition works', function(t) {
+  var fromx = random()
+    , fromy = random()
+    , fromz = random()
+    , w = random()
+    , h = random()
+    , d = random()
+    , b = aabb([fromx, fromy, fromz], [w, h, d])
+    , tox = random()
+    , toy = random()
+    , toz = random()
+
+  t.ok(eps(b.x0(), fromx),   'x0 == fromx')
+  t.ok(eps(b.y0(), fromy),   'y0 == fromy')
+  t.ok(eps(b.z0(), fromz),   'z0 == fromz')
+  t.ok(eps(b.x1(), fromx+w), 'x1 == fromx+w')
+  t.ok(eps(b.y1(), fromy+h), 'y1 == fromy+h')
+  t.ok(eps(b.z1(), fromz+d), 'z1 == fromz+d')
+  
+  b.setPosition([tox, toy, toz])
+  
+  t.ok(eps(b.x0(), tox),   'x0 == tox')
+  t.ok(eps(b.y0(), toy),   'y0 == toy')
+  t.ok(eps(b.z0(), toz),   'z0 == toz')
+  t.ok(eps(b.x1(), tox+w), 'x1 == tox+w')
+  t.ok(eps(b.y1(), toy+h), 'y1 == toy+h')
+  t.ok(eps(b.z1(), toz+d), 'z1 == toz+d')
+  t.end()
+})
+
 test('expand works', function(t) {
   var b0 = aabb([0, 0, 0], [10, 10, 10])
     , b1 = aabb([-5, -5, -5], [2, 2, 2])
