@@ -12,7 +12,7 @@ function AABB(pos, vec) {
   vec3.add(pos2, pos, vec)
  
   this.base = vec3.min(vec3.create(), pos, pos2)
-  this.vec = vec
+  this.vec = vec3.clone(vec)
   this.max = vec3.max(vec3.create(), pos, pos2)
 
   this.mag = vec3.length(this.vec)
