@@ -1,7 +1,6 @@
 var test = require('tape')
   , aabb = require('./index')
-  , glmatrix = require('gl-matrix')
-  , vec2 = glmatrix.vec2
+
 
 if(typeof Float32Array === 'undefined') {
 
@@ -147,5 +146,5 @@ test('touches works', function(t) {
 
   b1 = aabb([-10, -10, -10], [10, 10, 10])
   t.equals(b0.touches(b1), false, 'should not touch')
-
+  t.end()
 })

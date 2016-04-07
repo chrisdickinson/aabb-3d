@@ -21,7 +21,7 @@
   "author": "Chris Dickinson <chris@neversaw.us>",
   "license": "MIT",
   "dependencies": {
-    "gl-matrix": "2.X.X"
+    "gl-vec3": "^1.0.3"
   },
   "devDependencies": {
     "tape": "~0.1.5"
