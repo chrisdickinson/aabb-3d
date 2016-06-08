@@ -65,8 +65,8 @@ proto.translate = function(by) {
 }
 
 proto.setPosition = function(pos) {
-  vec3.subtract(pos, pos, this.base)
-  this.translate(pos)
+  vec3.add(this.max, pos, this.vec)
+  vec3.copy(this.base, pos)
   return this
 }
 
