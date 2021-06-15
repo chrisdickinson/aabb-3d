@@ -1,6 +1,6 @@
 module.exports = AABB
 
-var vec3 = require('gl-matrix').vec3
+var vec3 = require('gl-vec3')
 
 function AABB(pos, vec) {
 
@@ -12,7 +12,7 @@ function AABB(pos, vec) {
   vec3.add(pos2, pos, vec)
  
   this.base = vec3.min(vec3.create(), pos, pos2)
-  this.vec = vec
+  this.vec = vec3.clone(vec)
   this.max = vec3.max(vec3.create(), pos, pos2)
 
   this.mag = vec3.length(this.vec)
@@ -64,13 +64,19 @@ proto.translate = function(by) {
   return this
 }
 
+proto.setPosition = function(pos) {
+  vec3.add(this.max, pos, this.vec)
+  vec3.copy(this.base, pos)
+  return this
+}
+
 proto.expand = function(aabb) {
   var max = vec3.create()
     , min = vec3.create()
 
   vec3.max(max, aabb.max, this.max)
   vec3.min(min, aabb.base, this.base)
-  vec3.sub(max, max, min)
+  vec3.subtract(max, max, min)
 
   return new AABB(min, max)
 }

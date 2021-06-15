@@ -1,7 +1,6 @@
 var test = require('tape')
   , aabb = require('./index')
-  , glmatrix = require('gl-matrix')
-  , vec2 = glmatrix.vec2
+
 
 if(typeof Float32Array === 'undefined') {
 
@@ -43,6 +42,36 @@ test('translate works', function(t) {
   t.ok(eps(b.y1(), ty + h), 'y1 == ty + h')
   t.ok(eps(b.z0(), tz), 'z0 == tz')
   t.ok(eps(b.z1(), tz + d), 'z1 == tz + d')
+  t.end()
+})
+
+test('setPosition works', function(t) {
+  var fromx = random()
+    , fromy = random()
+    , fromz = random()
+    , w = random()
+    , h = random()
+    , d = random()
+    , b = aabb([fromx, fromy, fromz], [w, h, d])
+    , tox = random()
+    , toy = random()
+    , toz = random()
+
+  t.ok(eps(b.x0(), fromx),   'x0 == fromx')
+  t.ok(eps(b.y0(), fromy),   'y0 == fromy')
+  t.ok(eps(b.z0(), fromz),   'z0 == fromz')
+  t.ok(eps(b.x1(), fromx+w), 'x1 == fromx+w')
+  t.ok(eps(b.y1(), fromy+h), 'y1 == fromy+h')
+  t.ok(eps(b.z1(), fromz+d), 'z1 == fromz+d')
+  
+  b.setPosition([tox, toy, toz])
+  
+  t.ok(eps(b.x0(), tox),   'x0 == tox')
+  t.ok(eps(b.y0(), toy),   'y0 == toy')
+  t.ok(eps(b.z0(), toz),   'z0 == toz')
+  t.ok(eps(b.x1(), tox+w), 'x1 == tox+w')
+  t.ok(eps(b.y1(), toy+h), 'y1 == toy+h')
+  t.ok(eps(b.z1(), toz+d), 'z1 == toz+d')
   t.end()
 })
 
@@ -117,5 +146,5 @@ test('touches works', function(t) {
 
   b1 = aabb([-10, -10, -10], [10, 10, 10])
   t.equals(b0.touches(b1), false, 'should not touch')
-
+  t.end()
 })
